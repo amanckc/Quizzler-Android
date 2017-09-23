@@ -1,19 +1,24 @@
 package com.londonappbrewery.quizzler;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
     // TODO: Declare constants here
-    Button mTrueButton,mfalseButton;
-    TextView mQuestionTextView;
-    int mIndex,mQusetion;
+    Button mTrueButton ,  mfalseButton;
+    TextView mQuestionTextView , mScoreTextView;
+    int mIndex , mQusetion , mScore;
+    ProgressBar mProgressBar;
+
 
 
     // TODO: Declare member variables here:
@@ -35,7 +40,7 @@ public class MainActivity extends Activity {
             new TrueFalse(R.string.question_12, false),
             new TrueFalse(R.string.question_13,true)
     };//has constructor calls(new object references) as it's elements
-
+    final  int PROGRESS_BAR_INCREMENT=(int)Math.ceil (100.0/mQuestionBank.length);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +49,10 @@ public class MainActivity extends Activity {
         mTrueButton= (Button) findViewById (R.id.true_button);
         mfalseButton= (Button) findViewById (R.id.false_button);
         mQuestionTextView= (TextView) findViewById (R.id.question_text_view);
+        mScoreTextView= (TextView) findViewById (R.id.score);
+        mProgressBar= (ProgressBar) findViewById (R.id.progress_bar);
 
-       //retrieve constructor call
+        //retrieve constructor call
        mQusetion=mQuestionBank[mIndex].getQuestionID ();//get "R.id.question_?"
 
         mQuestionTextView.setText (mQusetion);
@@ -61,7 +68,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick (View v) {
                 checkAnswer (false);
-               updateQuestion (); 
+               updateQuestion ();
             }
         });
 
@@ -70,14 +77,31 @@ public class MainActivity extends Activity {
 
     private void updateQuestion(){
         mIndex=(mIndex+1)%mQuestionBank.length;
+        if(mIndex==0){
+            AlertDialog.Builder alert=new AlertDialog.Builder (this);
+            alert.setTitle ("game over");
+            alert.setCancelable (false);
+            alert.setMessage ("you scored"+ mScore+ "points");
+            alert.setPositiveButton ("close app", new DialogInterface.OnClickListener () {
+                @Override
+                public void onClick (DialogInterface dialog, int which) {
+                    finish ();
+                }
+            });
+            alert.show();
+        }
         mQusetion=mQuestionBank[mIndex].getQuestionID ();
         mQuestionTextView.setText (mQusetion);
+        mProgressBar.incrementProgressBy (PROGRESS_BAR_INCREMENT);
+        mScoreTextView.setText ("Score"+mScore+" / "+mQuestionBank.length);
     }
     private void checkAnswer(boolean userSelection)
     {
         boolean correctAnswer=mQuestionBank[mIndex].isAnswer ();
         if (userSelection ==correctAnswer){
             Toast.makeText (this, R.string.correct_toast, Toast.LENGTH_SHORT).show ();
+            mScore+=1;
+
         }
         else {
             Toast.makeText (this,R.string.incorrect_toast, Toast.LENGTH_SHORT).show ();
