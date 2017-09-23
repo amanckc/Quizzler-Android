@@ -2,10 +2,14 @@ package com.londonappbrewery.quizzler;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 
     // TODO: Declare constants here
+    Button mTrueButton,mfalseButton;
 
 
     // TODO: Declare member variables here:
@@ -32,7 +36,21 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mTrueButton= (Button) findViewById (R.id.true_button);
+        mfalseButton= (Button) findViewById (R.id.false_button);
+        View.OnClickListener myListener=new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                Log.d ("Quizzeler","button pressed");
+            }
+        };
+        mTrueButton.setOnClickListener (myListener);
+        mfalseButton.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
 
+            }
+        });
 
 
     }
