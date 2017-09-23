@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
                 Log.d ("Quizzeler","button pressed");
             }
         };
-        mTrueButton.setOnClickListener (myListener);
+        mTrueButton.setOnClickListener (myListener); 
         mfalseButton.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View v) {
