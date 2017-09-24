@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(savedInstanceState!=null)
+        if(savedInstanceState!=null)//when screen is rotated
         {
             mScore=savedInstanceState.getInt ("scorekey");
             mIndex=savedInstanceState.getInt ("IndexKey");
@@ -64,7 +64,7 @@ public class MainActivity extends Activity {
         mProgressBar= (ProgressBar) findViewById (R.id.progress_bar);
 
         //retrieve constructor call
-        
+
        mQusetion=mQuestionBank[mIndex].getQuestionID ();//get "R.id.question_?"
 
         mQuestionTextView.setText (mQusetion);
@@ -123,8 +123,8 @@ public class MainActivity extends Activity {
     @Override
     public  void onSaveInstanceState(Bundle outState)
     {
-        super.onSaveInstanceState (outState);
-        outState.putInt ("scorekey",mScore);
+        super.onSaveInstanceState (outState);//outstate stores state of our app when screen is rotated
+        outState.putInt ("scorekey",mScore);//key-value -pair
         outState.putInt ("IndexKey",mIndex);
 
 
