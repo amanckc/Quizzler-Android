@@ -64,6 +64,7 @@ public class MainActivity extends Activity {
         mProgressBar= (ProgressBar) findViewById (R.id.progress_bar);
 
         //retrieve constructor call
+        
        mQusetion=mQuestionBank[mIndex].getQuestionID ();//get "R.id.question_?"
 
         mQuestionTextView.setText (mQusetion);
