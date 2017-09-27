@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
             mScore=savedInstanceState.getInt ("scorekey");
             mIndex=savedInstanceState.getInt ("IndexKey");
         }
-        else 
+        else
         {
             mScore=0;
             mIndex=0;
