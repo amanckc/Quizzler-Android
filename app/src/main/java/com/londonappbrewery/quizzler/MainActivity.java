@@ -3,6 +3,8 @@ package com.londonappbrewery.quizzler;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -62,6 +64,9 @@ public class MainActivity extends Activity {
         mQuestionTextView= (TextView) findViewById (R.id.question_text_view);
         mScoreTextView= (TextView) findViewById (R.id.score);
         mProgressBar= (ProgressBar) findViewById (R.id.progress_bar);
+       // mProgressBar.getProgressTintList (ColorStateList.valueOf(Color.RED));
+        mProgressBar.getProgressDrawable().setColorFilter(
+                Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
 
         //retrieve constructor call
 
